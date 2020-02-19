@@ -131,7 +131,15 @@ class Clause {
         unsigned has_extra : 1;
         unsigned reloced   : 1;
         unsigned size      : 27; }                            header;
+#ifdef __GNUC__
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wpedantic"
+    // ISO C++ forbids flexible array member 'data'
+#endif
     union data_union { Lit lit; float act; uint32_t abs; CRef rel; } data[0];
+#ifdef __GNUC__
+#  pragma GCC diagnostic pop
+#endif
 
     friend class ClauseAllocator;
 
