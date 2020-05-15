@@ -2,7 +2,7 @@ from conans import ConanFile, tools
 
 
 class MinisatConan(ConanFile):
-    python_requires = "conan_base/[~=1]@cybercalc+ci-scripts/master"
+    python_requires = "conan_base/[~=2.0]@cybercalc/master"
     python_requires_extend = "conan_base.CybercalcConanBase"
 
     name = "minisat"
@@ -13,6 +13,15 @@ class MinisatConan(ConanFile):
     license = "MIT"
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
+    no_copy_source = True
+    options = {
+        'shared': [False, True],
+        'lto': [False, True],
+    }
+    default_options = {
+        'shared': False,
+        'lto': False,
+    }
     scm = {
         "type": "git",
         "url": "auto",
