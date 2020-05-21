@@ -131,8 +131,7 @@ public:
     void copyTo(vec<T>& copy) const {
         copy.clear();
         copy.capacity(size());
-        std::copy(begin(), end(), copy.begin());
-        copy.m_current = copy.m_data + size();
+        copy.m_current = std::copy(begin(), end(), copy.begin());
     }
     void moveTo(vec<T>& dest) {
         swap(dest);
