@@ -135,7 +135,14 @@ bool Solver::addClause_(vec<Lit>& ps)
     if (!ok) return false;
 
     // Check if clause is satisfied and remove false/duplicate literals:
-    sort(ps);
+
+    // We can skip sorting small clauses:
+    // * 1 is always sorted!
+    // * 2 is not always sorted, but for the unique-like loop below,
+    //   it is good enough.
+    if (ps.size() > 2) {
+        sort(ps);
+    }
     Lit p = lit_Undef;
     auto i = ps.begin();
     auto j = ps.begin();
