@@ -72,7 +72,7 @@ public:
    vec(vec<T> const&) = delete;
 
     // Pointer to first element:
-    operator T*() { return m_data; }
+    explicit operator T*() { return m_data; }
 
     // Size operations:
     int size() const { return static_cast<int>(m_current - m_data); }
