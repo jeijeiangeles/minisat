@@ -1,4 +1,5 @@
 from conans import ConanFile, tools
+import os
 
 
 class MinisatConan(ConanFile):
@@ -39,7 +40,11 @@ conan_basic_setup()''')
         cmake.configure()
         cmake.build()
         if self.should_test:
-            self.run('ctest -j `nproc`')
+            try:
+                cpu_count = len(os.sched_getaffinity(0))
+            except NotImplementedError:
+                cpu_count = os.cpu_count() or 1
+            self.run('ctest -C {} -j {}'.format(cmake.definitions['CMAKE_BUILD_TYPE'], cpu_count))
 
     def package(self):
         cmake = self.CMake()
