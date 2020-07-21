@@ -42,7 +42,7 @@ conan_basic_setup()''')
         if self.should_test:
             try:
                 cpu_count = len(os.sched_getaffinity(0))
-            except NotImplementedError:
+            except AttributeError:
                 cpu_count = os.cpu_count() or 1
             self.run('ctest -C {} -j {}'.format(cmake.definitions['CMAKE_BUILD_TYPE'], cpu_count))
 
