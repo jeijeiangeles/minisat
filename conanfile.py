@@ -44,7 +44,11 @@ conan_basic_setup()''')
                 cpu_count = len(os.sched_getaffinity(0))
             except AttributeError:
                 cpu_count = os.cpu_count() or 1
-            self.run('ctest -C {} -j {}'.format(cmake.definitions['CMAKE_BUILD_TYPE'], cpu_count))
+            print(cmake.definitions)
+            cmd = 'ctest -j {}'.format(cpu_count)
+            if cmake.is_multi_configuration:
+                cmd += ' -C {}'.format(cmake.build_config.split()[-1])
+            self.run(cmd)
 
     def package(self):
         cmake = self.CMake()
