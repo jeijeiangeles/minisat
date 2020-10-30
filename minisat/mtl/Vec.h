@@ -27,8 +27,8 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #include <algorithm>
 #include <functional>
 
+#include "minisat/core/ThrowOOMException.h"
 #include "minisat/mtl/IntTypes.h"
-#include "minisat/mtl/XAlloc.h"
 
 namespace Minisat {
 
@@ -207,7 +207,7 @@ void vec<T>::capacity(int min_cap) {
 
     auto new_data = static_cast<T*>(realloc(m_data, new_cap * sizeof(T)));
     if (new_data == nullptr) {
-        throw OutOfMemoryException("vec::capacity could not allocate enough memory");
+        throw_OutOfMemoryException("vec::capacity could not allocate enough memory");
     }
     const auto current_size = size();
     m_data = new_data;
