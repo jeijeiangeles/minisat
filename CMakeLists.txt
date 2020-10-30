@@ -25,6 +25,7 @@ include(GNUInstallDirs)
 
 add_library(libminisat STATIC
     # Impl files
+    minisat/core/OutOfMemoryException.cc
     minisat/core/Solver.cc
     minisat/core/SolverTypes.cc
     minisat/utils/Options.cc
@@ -32,6 +33,7 @@ add_library(libminisat STATIC
     minisat/simp/SimpSolver.cc
     # Header files for IDEs
     minisat/core/Dimacs.h
+    minisat/core/OutOfMemoryException.h
     minisat/core/Solver.h
     minisat/core/SolverTypes.h
     minisat/mtl/Alg.h

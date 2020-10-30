@@ -1,5 +1,4 @@
-/****************************************************************************************[XAlloc.h]
-Copyright (c) 2009-2010, Niklas Sorensson
+/****************************************************************************************
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,29 +17,25 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 **************************************************************************************************/
 
 
-#ifndef Minisat_XAlloc_h
-#define Minisat_XAlloc_h
+#ifndef Minisat_OutOfMemoryException_h
+#define Minisat_OutOfMemoryException_h
 
-#include "minisat/core/OutOfMemoryException.h"
-
-#include <errno.h>
-#include <stdlib.h>
+#include <exception>
 
 namespace Minisat {
 
-//=================================================================================================
-// Simple layer on top of malloc/realloc to catch out-of-memory situtaions and provide some typing:
+//! Exception to signalize that Minisat's code ran out of memory
+class OutOfMemoryException : public std::exception {
+    const char* m_msg = "Minisat::OutOfMemoryException";
 
-static inline void* xrealloc(void *ptr, size_t size)
-{
-    void* mem = realloc(ptr, size);
-    if (mem == NULL && errno == ENOMEM){
-        throw OutOfMemoryException();
-    }else
-        return mem;
-}
+public:
+    OutOfMemoryException() = default;
+    explicit OutOfMemoryException(char const * const msg):
+        m_msg(msg) {}
 
-//=================================================================================================
-}
+    const char* what() const noexcept override;
+};
 
-#endif
+} // end namespace Minisat
+
+#endif // Minisat_OutOfMemoryException_h
