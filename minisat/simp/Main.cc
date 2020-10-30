@@ -26,6 +26,7 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #include "minisat/utils/ParseUtils.h"
 #include "minisat/utils/Options.h"
 #include "minisat/core/Dimacs.h"
+#include "minisat/core/OutOfMemoryException.h"
 #include "minisat/simp/SimpSolver.h"
 
 using namespace Minisat;
