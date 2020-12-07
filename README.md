@@ -43,25 +43,13 @@ Directory overview
 Building
 --------
 
-### a) Quick way
 ```bash
-./build.sh
+# You can build in any directory, just name the minisat directory in the cmake
+# command.
+mkdir build && cd build
+cmake ..
+make
 ```
-
-
-### b) Traditional way
-
-Release version: without assertions, statically linked, etc
-
-```bash
-export MROOT=<minisat-dir> # or `setenv` in cshell
-cd minisat
-cd { core | simp }
-make rs
-cp minisat_static <install-dir>/minisat
-```
-
-
 
 Examples
 ========
